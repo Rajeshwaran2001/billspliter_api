@@ -1,0 +1,1 @@
+web: gunicorn billspliter_api.wsgi

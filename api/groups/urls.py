@@ -7,5 +7,6 @@ router = routers.DefaultRouter()
 router.register(r'', views.GroupViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('add/<str:id>/<str:token>/', views.add, name='group.add'),
 ]

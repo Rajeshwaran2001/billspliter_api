@@ -9,3 +9,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = group
         fields = ('id', 'Group_Name', 'description', 'group_icon', 'members')
+
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ('id', 'group', 'user', 'balance')

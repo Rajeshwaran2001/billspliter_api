@@ -1,12 +1,28 @@
 from rest_framework import viewsets
 
 from api.groups import models
-from .serializers import GroupSerializer
+from .serializers import GroupSerializer, MemberSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+
 # Create your views here.
+
+class ShowGroupsApiView(APIView):
+    def get(self, request) -> Response:
+       member = request.GET['name']
+       try:
+           member = models.Member.objects.filter(user=member)
+           all_group =[x.group for x in member ]
+           return Response({'message': f'{all_group}'})
+       except models.group.DoesNotExist:
+            return Response(
+                {'message': 'Group Does not exist !'
+                 },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
 
 class ShowGroupMembersApiView(APIView):
     def get(self, request) -> Response:
@@ -35,7 +51,7 @@ class AddUserToGroupApiView(APIView):
         group = models.group.objects.get(Group_Name=Group_Name)
         if user not in group.members.all():
             group.members.add(user.id)
-            return Response({'message': f'User {user_email} successfully added to group {group.Group_Name}'})
+            return Response({'message': f'User successfully added to group {group.Group_Name}'})
         return Response({'message': 'User already exists in the group'}, status=status.HTTP_400_BAD_REQUEST)
 
 class GroupViewSet(viewsets.ModelViewSet):

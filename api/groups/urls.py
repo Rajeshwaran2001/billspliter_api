@@ -8,6 +8,7 @@ router.register(r'', views.GroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('showGroupMembers', views.ShowGroupMembersApiView.as_view()),## to show group members
-    path('addUserToGroup', views.AddUserToGroupApiView.as_view()), ## to add user to groups
+    path('showMembersGroup', views.ShowGroupsApiView.as_view()),  ## to show group members
+    path('showGroupMembers', views.ShowGroupMembersApiView.as_view()),  ## to show group members
+    path('addUserToGroup', views.AddUserToGroupApiView.as_view()),  ## to add user to groups
 ]

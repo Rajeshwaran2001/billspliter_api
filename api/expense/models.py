@@ -6,7 +6,7 @@ class Expense(models.Model):
     title = models.CharField(null=True, max_length=100)
     price = models.FloatField(null=True)
     group = models.ForeignKey(group, null=True, on_delete=models.CASCADE)
-    paid_date = models.DateTimeField(default=datetime.now(), null=True)
+    paid_date = models.DateField(default=datetime.now(), null=True)
     paid_by = models.ForeignKey(Member, related_name='paid_by', on_delete=models.CASCADE, null=True)
     split_with = models.ManyToManyField(Member, related_name='expense_split')
     created_by = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)

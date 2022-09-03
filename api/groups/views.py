@@ -1,8 +1,6 @@
 from rest_framework import viewsets
-from django.http import JsonResponse
-from django.contrib.auth import get_user_model
-from django.views.decorators.csrf import csrf_exempt
-from api.groups import models, serializers
+
+from api.groups import models
 from .serializers import GroupSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response

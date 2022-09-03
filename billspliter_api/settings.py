@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i8qqjcnr3@&p-53-g^6frywnn-*1!4jpp@)vrwntzsq$c8-9!v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['bill-spliter.herokuapp.com']
+ALLOWED_HOSTS = ['api.mdpackers.in']
 
 # Application definition
 
@@ -85,23 +85,15 @@ WSGI_APPLICATION = 'billspliter_api.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-     'default': {
-
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'dfb3ovcbjq76ju',
-
-       'USER': 'bcafqdaedhawko',
-
-        'PASSWORD': 'e92c0b19c9a668155486bc7d56e31ff2233856104749ce427391c9eba572308a',
-
-         'HOST': 'ec2-34-227-135-211.compute-1.amazonaws.com',
-
-        'PORT': '5432',
-
+    'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mdpackers_api',
+            'USER': 'mdpackers_admin',
+            'PASSWORD': 'S@g@42218',
+            'HOST': 'localhost',
+            'PORT': '3306',
     }
-
- }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

@@ -85,11 +85,23 @@ WSGI_APPLICATION = 'billspliter_api.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     'default': {
+
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'dfb3ovcbjq76ju',
+
+       'USER': 'bcafqdaedhawko',
+
+        'PASSWORD': 'e92c0b19c9a668155486bc7d56e31ff2233856104749ce427391c9eba572308a',
+
+         'HOST': 'ec2-34-227-135-211.compute-1.amazonaws.com',
+
+        'PORT': '5432',
+
     }
-}
+
+ }
 
 
 # Password validation

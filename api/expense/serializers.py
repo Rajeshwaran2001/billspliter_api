@@ -6,9 +6,9 @@ from .models import Expense, Debt, ExpenseUser
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expense
-        fields = ('group_id', 'description', 'payment',
-                  'date', 'friendship_id', 'repayments',
-                  'user', 'transaction_id')
+        fields = ('name', 'expense_group',
+                  'description', 'payment',
+                  'amount', 'repayments','users', 'transaction_id')
 
 
 class DebtSerializer(serializers.ModelSerializer):

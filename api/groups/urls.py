@@ -11,4 +11,6 @@ urlpatterns = [
     path('showMembersGroup', views.ShowGroupsApiView.as_view()),  ## to show group members
     path('showGroupMembers', views.ShowGroupMembersApiView.as_view()),  ## to show group members
     path('addUserToGroup', views.AddUserToGroupApiView.as_view()),  ## to add user to groups
+    path('groupDetails', views.ShowGroupDetailsApiView.as_view()),
+    path('deleteGroup', views.DeleteGroupApiView.as_view()),
 ]

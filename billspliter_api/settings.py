@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     #Custom Apps
     'api',
     'api.user',
-    'api.groups'
+    'api.groups',
+    'api.expense'
 ]
 
 MIDDLEWARE = [

@@ -8,5 +8,7 @@ router.register(r'', views.ExpenseViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('addExpense', views.CreatePersonalExpenseApiView.as_view()),
+    path('createExpense', views.CreateExpenseApiView.as_view()),
 
 ]

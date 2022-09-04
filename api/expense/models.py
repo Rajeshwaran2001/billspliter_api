@@ -1,18 +1,34 @@
+import uuid
+
 from django.db import models
-from datetime import datetime
-from api.groups.models import group,Member
+from api.groups.models import group, Member
+from api.user.models import CustomUser
+
+
 # Create your models here.
-class Expense(models.Model):
-    title = models.CharField(null=True, max_length=100)
-    price = models.FloatField(null=True)
-    group = models.ForeignKey(group, null=True, on_delete=models.CASCADE)
-    paid_date = models.DateField(default=datetime.now(), null=True)
-    paid_by = models.ForeignKey(Member, related_name='paid_by', on_delete=models.CASCADE, null=True)
-    split_with = models.ManyToManyField(Member, related_name='expense_split')
-    created_by = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    comment = models.TextField(max_length=500, null=True, blank=True)
+class Debt(models.Model):
+    from_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='from_user')
+    to_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='to_user')
+    amount = models.IntegerField()
 
     def __str__(self):
-        return self.title
+        return f'{self.to_user.name} owes {self.amount} to {self.from_user.name}'
+
+class ExpenseUser(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    paid_share = models.IntegerField(default=0)
+    owed_share = models.IntegerField(default=0)
+    net_balance = models.IntegerField(default=0)
+
+
+class Expense(models.Model):
+    name = models.CharField(max_length=255, unique=False)
+    expense_group = models.ForeignKey(group, on_delete=models.DO_NOTHING, null=True, db_constraint=False)
+    description = models.CharField(max_length=255)
+    payment = models.BooleanField(default=False)#
+    amount = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
+    repayments = models.ManyToManyField(Debt)
+    users = models.ManyToManyField(ExpenseUser)
+    transaction_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

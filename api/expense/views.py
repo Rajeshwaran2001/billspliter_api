@@ -75,7 +75,7 @@ class CreatePersonalExpenseApiView(APIView):
 
         group = None
         if group_name is not None:
-            group = models.Group.objects.get(group_name=group_name)
+            group = models.group.objects.get(group_name=group_name)
         per_member_share = amount / len(all_users)
         expense_users = []
         repayments = []
@@ -105,7 +105,70 @@ class CreatePersonalExpenseApiView(APIView):
         expense.save()
         return Response({'message': 'Expense Created successfully'})
 
+
 class RecordPaymentApiView(APIView):
+    def post(self, request) -> Response:
+        from_user_email = request.data.get('from_user')
+        to_user_email = request.data.get('to_user')
+        amount = request.data.get('amount')
+        Group_Name = request.data.get('Group_Name')
+        expense_name = request.data.get('expense_name')
+        from_user = models.CustomUser.objects.get(email=from_user_email)
+        to_user = models.CustomUser.objects.get(email=to_user_email)
+        try:
+            if Group_Name is None:
+
+                models.Debt.objects.create(**{
+                    "from_user": from_user,
+                    "to_user": to_user,
+                    "amount": amount
+                })
+                return Response({
+                    "message": "Payment Added successfully"
+                })
+            else:
+                expense = models.Expense.objects.get(name=expense_name)
+                if expense.expense_group != models.group.objects.get(group_name=Group_Name):
+                    return Response({
+                        "message": "Expense  not in group, please check !"
+                    }, status=status.HTTP_400_BAD_REQUEST)
+                flag = False
+                for i in expense.repayments.all():
+                    if i.from_user == to_user and i.to_user == from_user:
+                        flag = True
+                        i.amount = i.amount - amount
+                        i.save()
+                        break
+                if not flag:
+                    debt = models.Debt.objects.create(**{
+                        "from_user": to_user,
+                        "to_user": from_user,
+                        "amount": amount
+                    })
+                    expense.repayments.add(debt)
+                expense.save()
+                flag = False
+                for i in expense.repayments.all():
+                    if i.amount > 0:
+                        flag = True
+                        break
+                if not flag:
+                    expense.payment = True
+                    expense.save()
+                return Response({
+                    "message": "Expense Payment Added successfully"
+                })
+        except models.CustomUser.DoesNotExist:
+            return Response({
+                "message": "User does not exist"
+            })
+        except models.Expense.DoesNotExist:
+            return Response({
+                "message": "Expense does not exist"
+            })
+
+
+class RecordPersonalPaymentApiView(APIView):
     def post(self, request) -> Response:
         from_user_email = request.data.get('from_user')
         to_user_email = request.data.get('to_user')

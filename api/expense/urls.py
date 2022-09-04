@@ -11,5 +11,6 @@ urlpatterns = [
     path('addExpense', views.CreatePersonalExpenseApiView.as_view()),
     path('createExpense', views.CreateExpenseApiView.as_view()),
     path('recordPayment', views.RecordPaymentApiView.as_view()),
+    path('recordPersonlPayment', views.RecordPersonalPaymentApiView.as_view()),
 
 ]

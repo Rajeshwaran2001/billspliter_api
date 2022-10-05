@@ -5,7 +5,7 @@
 
 ## To check all endpoints
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/23160950-4f221aaf-5425-45bf-ad88-04cf34245b6c?action=collection%2Ffork&collection-url=entityId%3D23160950-4f221aaf-5425-45bf-ad88-04cf34245b6c%26entityType%3Dcollection%26workspaceId%3Dc4842272-d2eb-45fe-a15a-469fd11d626f)
+[![Run in Postman](https://www.postman.com/rajesh2001/workspace/bill-splitter-api/request/23160950-e14e695f-9b56-4750-ab2a-964df2044002)
 
 
 

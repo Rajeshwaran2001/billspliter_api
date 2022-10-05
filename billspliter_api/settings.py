@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i8qqjcnr3@&p-53-g^6frywnn-*1!4jpp@)vrwntzsq$c8-9!v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.mdpackers.in']
 
 # Application definition
 
@@ -87,8 +87,12 @@ WSGI_APPLICATION = 'billspliter_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mdpackers_api',
+            'USER': 'mdpackers_admin',
+            'PASSWORD': 'S@g@42218',
+            'HOST': 'localhost',
+            'PORT': '3306',
     }
 }
 
@@ -126,6 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 
 MEDIA_URL = '/media/'

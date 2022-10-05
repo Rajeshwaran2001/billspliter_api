@@ -84,8 +84,13 @@ WSGI_APPLICATION = 'billspliter_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': 'api',
+        "CLIENT" :{
+            "host": "mongodb+srv://admin:S5UZ0I8LOO5QwjOc@api.jhipgwq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "username": "admin",
+            "password": "S5UZ0I8LOO5QwjOc",
+        }
     }
 }
 
